@@ -1,0 +1,15 @@
+### Create post
+POST http://localhost:8080/users/create
+Content-Type: application/json
+
+{
+  "id": 100000001,
+  "username": "username1",
+  "email": "test1@test.com",
+  "description": "This is description 1 of user 1"
+}
+
+
+### Search posts
+GET http://localhost:8080/users/search?text=user&page=0&size=15
+Content-Type: application/json
