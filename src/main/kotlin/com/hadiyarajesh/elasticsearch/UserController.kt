@@ -12,8 +12,8 @@ class UserController(
 ) {
 
     @PostMapping("/create")
-    fun createPost(@RequestBody user: User): ResponseEntity<User> {
-        val createdUser = userService.createUser(user)
+    fun createUser(@RequestBody user: User): ResponseEntity<User> {
+        val createdUser = userService.saveUser(user)
         return ResponseEntity.ok().body(createdUser)
     }
 
@@ -23,7 +23,7 @@ class UserController(
         @RequestParam(defaultValue = "0") page: Int,
         @RequestParam(defaultValue = "15") size: Int
     ): ResponseEntity<Page<User>> {
-        val users = userService.getUserByDescription(text, page, size)
+        val users = userService.searchUsers(text, page, size)
         return ResponseEntity.ok(users)
     }
 }

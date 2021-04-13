@@ -2,7 +2,7 @@ package com.hadiyarajesh.elasticsearch
 
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
-import org.springframework.data.domain.Slice
+import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -11,21 +11,14 @@ import org.springframework.transaction.annotation.Transactional
 class UserService(
     private val userRepository: UserRepository,
 ) {
-    fun createUser(user: User): User {
+    fun saveUser(user: User): User {
         return userRepository.save(user)
     }
 
-    fun getUserByUsername(username: String, page: Int, size: Int): Page<User> {
-        val pageable = PageRequest.of(page, size)
-        return userRepository.findAllByUsernameContaining(username, pageable)
-    }
-
-    fun getUserByEmail(email: String): User? {
-        return userRepository.findByEmail(email)
-    }
-
-    fun getUserByDescription(description: String, page: Int, size: Int): Page<User> {
-        val pageable = PageRequest.of(page, size)
-        return userRepository.findAllByDescriptionContaining(description, pageable)
+    fun searchUsers(text: String, page: Int, size: Int): Page<User> {
+        val sort = Sort.by(Sort.Order.by("isActive")).descending().and(Sort.by("age").descending())
+        val usernameQuery = if (text.contains(" ")) text.replace(" ", "") else text
+        val pageable = PageRequest.of(page, size, sort)
+        return userRepository.findAllByUsernameContainingOrFullName(usernameQuery, text, pageable)
     }
 }

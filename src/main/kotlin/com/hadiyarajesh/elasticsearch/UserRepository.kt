@@ -7,9 +7,5 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface UserRepository : ElasticsearchRepository<User, Long> {
-    fun findAllByDescriptionContaining(description: String, pageable: Pageable): Page<User>
-
-    fun findAllByUsernameContaining(username: String, pageable: Pageable): Page<User>
-
-    fun findByEmail(email: String): User?
+    fun findAllByUsernameContainingOrFullName(username: String, fullName: String, pageable: Pageable): Page<User>
 }

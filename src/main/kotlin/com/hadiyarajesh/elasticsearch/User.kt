@@ -5,14 +5,14 @@ import org.springframework.data.elasticsearch.annotations.Document
 import org.springframework.data.elasticsearch.annotations.Field
 import org.springframework.data.elasticsearch.annotations.FieldType
 
-@Document(indexName = "users")
+@Document(indexName = "user")
 data class User(
     @Id
     val id: Long,
-    @Field(type = FieldType.Text)
-    val username: String,
     @Field(type = FieldType.Keyword)
-    val email: String,
+    val username: String,
     @Field(type = FieldType.Text)
-    val description: String
+    val fullName: String,
+    val age: Int,
+    val isActive: Boolean
 )
