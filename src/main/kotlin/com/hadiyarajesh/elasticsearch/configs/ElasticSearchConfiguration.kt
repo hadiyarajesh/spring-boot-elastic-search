@@ -1,4 +1,4 @@
-package com.hadiyarajesh.elasticsearch
+package com.hadiyarajesh.elasticsearch.configs
 
 import org.elasticsearch.client.RestHighLevelClient
 import org.springframework.context.annotation.Bean
@@ -8,12 +8,14 @@ import org.springframework.data.elasticsearch.client.RestClients
 import org.springframework.data.elasticsearch.config.AbstractElasticsearchConfiguration
 
 @Configuration
-class ElasticSearchConfiguration : AbstractElasticsearchConfiguration() {
+class ElasticSearchConfiguration(
+        private val elasticsearchProperties: ElasticsearchProperties
+) : AbstractElasticsearchConfiguration() {
     @Bean
     override fun elasticsearchClient(): RestHighLevelClient {
         val clientConfiguration = ClientConfiguration.builder()
-            .connectedTo("localhost:9200")
-            .build()
+                .connectedTo("${elasticsearchProperties.host}:${elasticsearchProperties.port}")
+                .build()
 
         return RestClients.create(clientConfiguration).rest()
     }

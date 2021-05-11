@@ -1,7 +1,8 @@
-package com.hadiyarajesh.elasticsearch
+package com.hadiyarajesh.elasticsearch.controllers
 
+import com.hadiyarajesh.elasticsearch.models.User
+import com.hadiyarajesh.elasticsearch.services.UserService
 import org.springframework.data.domain.Page
-import org.springframework.data.domain.Slice
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 

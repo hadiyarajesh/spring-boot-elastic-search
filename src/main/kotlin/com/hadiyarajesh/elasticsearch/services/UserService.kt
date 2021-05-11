@@ -1,5 +1,7 @@
-package com.hadiyarajesh.elasticsearch
+package com.hadiyarajesh.elasticsearch.services
 
+import com.hadiyarajesh.elasticsearch.models.User
+import com.hadiyarajesh.elasticsearch.repositories.UserRepository
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
@@ -9,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 @Transactional
 class UserService(
-    private val userRepository: UserRepository,
+        private val userRepository: UserRepository,
 ) {
     fun saveUser(user: User): User {
         return userRepository.save(user)

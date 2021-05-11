@@ -6,3 +6,8 @@ logging:
           elasticsearch:
             client:
               WIRE: trace
+
+app:
+  elasticsearch:
+    host: localhost
+    port: 9200
